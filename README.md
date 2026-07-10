@@ -1,6 +1,24 @@
-﻿# 教师评价助手 (AutoTeacherComment) - Windows桌面版
+# AutoTeacherComment-win
 
-一款 Windows 桌面应用，用于自动填写中北大学教务系统中的教师评价表单。
+基于 [yang-jingyu0722/nuc-teacher-comments](https://gitee.com/yang-jingyu0722/nuc-teacher-comments) 改进的 Windows 桌面版。
+
+---
+
+## 原项目
+
+**项目名称**：nuc-teacher-comments
+**原作作者**：[yang-jingyu0722](https://gitee.com/yang-jingyu0722)
+**原仓库地址**：https://gitee.com/yang-jingyu0722/nuc-teacher-comments
+**原项目说明**：一款安卓应用，用于自动填写中北大学教务系统中的教师评价表单。
+
+## 本版本改进
+
+- 将 Android App（Kotlin）转换为 **Windows 桌面应用**（Python）
+- 使用 **customtkinter** 构建现代化桌面 UI，替代 Android Material Design
+- 使用 **Edge WebView2** 内嵌浏览器替代 Android WebView，支持 JavaScript 注入自动填表
+- 独立的子进程评价浏览器，不阻塞主界面
+- 移除 Android 特有的 AccessibilityService、悬浮窗权限等依赖
+- 保留核心的 JavaScript 自动填写逻辑（单选按钮 + 输入框双模式）
 
 ## 功能特点
 
@@ -8,54 +26,39 @@
 - 🤖 **自动填写** - 在应用内浏览器打开教务系统，自动识别并填写评价表单
 - 🔄 **自动提交** - 填写完成后自动点击提交
 - ➡️ **自动切换** - 自动切换到下一位老师继续评价
-- 📊 **进度浮窗** - 实时显示打分信息（教师名称、进度、分数）
-- 📋 **课表管理** - 查看和管理课程表
-- 🎨 **简约界面** - 清爽的 Modern UI 设计
+- 📋 **课表管理** - 课程表查看（框架已搭建，待完善）
+- 🎨 **简约界面** - customtkinter 现代化 UI
 
 ## 使用说明
 
 ### 环境要求
 - Windows 10/11
-- Python 3.8+
-- Edge WebView2 Runtime (Windows 10+ 已内置)
+- Python 3.10+
+- Edge WebView2 Runtime（Windows 10+ 已内置）
 
 ### 安装和运行
 
-1. **安装依赖**
-```bash
+\\ash
 pip install -r requirements.txt
-```
-
-2. **启动应用**
-```bash
 python main.py
-```
-或者双击 `run.bat`
+\
+或者双击 un.bat\。
 
-### 使用方法
+## 项目结构
 
-1. **设置评分** - 在首页输入分数（1-100），或点击预设按钮（90/95/100）
-2. **开启评价** - 点击"开始评价"按钮
-3. **登录教务系统** - 在应用内浏览器中登录教务系统
-4. **自动填写** - 进入评价页面后，系统会自动识别并填写所有选项
-5. **查看进度** - 浮窗会实时显示当前评价进度
+\AutoTeacherComment-win/
+├── main.py                 # 程序入口
+├── run.bat                 # 一键启动脚本
+├── requirements.txt        # Python 依赖
+├── README.md               # 本文档
+└── app/
+    ├── __init__.py          # 主窗口 UI（标题栏 + 标签页）
+    ├── home_tab.py          # 首页（评分设置、开始/停止评价）
+    ├── schedule_tab.py      # 课表页面
+    ├── evaluation_runner.py # 独立进程：WebView 评价浏览器
+    ├── evaluator_js.py      # JavaScript 注入代码生成器
+    └── inject_js.txt        # JS 注入模板
+\
+## 许可证
 
-### 课表管理
-
-1. 切换到"课表"标签
-2. 可以通过 Web 导入（登录教务系统抓取）
-3. 也可以通过图片 OCR 导入课表截图
-
-## 技术实现
-
-- **Python + customtkinter** - 现代化桌面 UI
-- **pywebview (WebView2)** - 应用内浏览器，支持 JavaScript 注入
-- **JavaScript 自动填写** - 支持单选按钮和输入框两种表单模式
-- **多线程** - 保持 UI 响应流畅
-
-## 注意事项
-
-- 教务系统需要校园网或 VPN 访问
-- 不同学校的教务系统界面可能不同，可能需要调整匹配关键词
-- 应用内浏览器会保存登录状态
-
+本项目仅供学习交流使用。
