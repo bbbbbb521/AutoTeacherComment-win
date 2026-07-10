@@ -38,11 +38,11 @@
 
 ### 安装和运行
 
-\\ash
+\\bash
 pip install -r requirements.txt
 python main.py
 \
-或者双击 un.bat\。
+或者双击 run.bat\。
 
 ## 项目结构
 
